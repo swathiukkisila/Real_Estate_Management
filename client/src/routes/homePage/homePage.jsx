@@ -10,8 +10,9 @@ import Herosection from "../../components/herosection/Herosection";
 import Footer from "../../components/footer/Footer";
 import apiRequest from "../../lib/apiRequest";
 function HomePage() {
-  const { currentUser } = useContext(AuthContext);
 
+
+  const { updateUser, currentUser } = useContext(AuthContext);
   // Slick slider settings
   const settings = {
     dots: true,
@@ -23,6 +24,7 @@ function HomePage() {
     autoplaySpeed: 5000,
     arrows: false,
   };
+  
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
