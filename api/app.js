@@ -10,13 +10,13 @@ import messageRoute from "./routes/message.route.js";
 
 const app = express();
 
-app.use(
-  cors({
-      origin: "https://real-estate-management-zeta.vercel.app", // Allow only frontend origin
-      methods: "GET,POST,PUT,DELETE",
-      credentials: true, // Allow cookies & authentication headers
-    })
-);
+// app.use(
+//   cors({
+//       origin: "https://real-estate-management-zeta.vercel.app", // Allow only frontend origin
+//       methods: "GET,POST,PUT,DELETE",
+//       credentials: true, // Allow cookies & authentication headers
+//     })
+// );
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
