@@ -24,7 +24,7 @@ function HomePage() {
     autoplaySpeed: 5000,
     arrows: false,
   };
-  
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
