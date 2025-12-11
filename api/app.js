@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-      origin: "http://localhost:5173", // Allow only frontend origin
+      origin: "https://real-estate-management-zeta.vercel.app", // Allow only frontend origin
       methods: "GET,POST,PUT,DELETE",
       credentials: true, // Allow cookies & authentication headers
     })

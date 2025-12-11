@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://real-estate-management-zeta.vercel.app/",
   },
 });
 
@@ -46,11 +46,6 @@ io.on("connection", (socket) => {
       io.to(receiver.socketId).emit("getMessage", payload);
       console.log(`Message sent to ${receiverId}`);
     }
-  
-    // Send to sender also (confirmation update)
-   /* if (sender) {
-      io.to(sender.socketId).emit("getMessage", payload);
-    }*/
   });
   
 

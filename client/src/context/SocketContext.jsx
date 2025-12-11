@@ -12,7 +12,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (!socket) {
-      const newSocket = io("http://localhost:5000");
+      const newSocket = io("https://real-estate-management-1-e19c.onrender.com");
       setSocket(newSocket);
 
       newSocket.on("connect", () => {
