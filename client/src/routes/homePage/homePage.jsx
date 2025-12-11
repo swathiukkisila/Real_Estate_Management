@@ -9,6 +9,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Herosection from "../../components/herosection/Herosection";
 import Footer from "../../components/footer/Footer";
 import apiRequest from "../../lib/apiRequest";
+import {useNavigate } from "react-router-dom";
+
 function HomePage() {
 
 
