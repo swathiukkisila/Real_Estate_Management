@@ -5,7 +5,11 @@ import prisma from "../lib/prisma.js";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
+  console.log("📌 Register route hit");
+  console.log("📌 Request body:", req.body);
+  
   try {
+    console.log("📌 Connecting to MongoDB...");
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists!" });
@@ -24,13 +28,15 @@ export const register = async (req, res) => {
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.log(err);
+    console.log("❌ Register error:", err);
     res.status(500).json({ message: "Failed to create user!" });
   }
 };
 
 export const login = async (req, res) => {
   const { username, password } = req.body;
-
+  console.log("📌 Login route hit");
+  console.log("📌 Request body:", req.body);
   try {
     // CHECK IF THE USER EXISTS
 

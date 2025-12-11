@@ -17,6 +17,13 @@ app.use(
       credentials: true, // Allow cookies & authentication headers
     })
 );
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -26,8 +33,8 @@ app.use("/api/posts", postRoute);
 app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
+const PORT = process.env.PORT || 8800;
 
-app.listen(8800, () => {
-  console.log("Server is running!");
+app.listen(PORT, () => {
+  console.log(`API Server running on port ${PORT}`);
 });
-
