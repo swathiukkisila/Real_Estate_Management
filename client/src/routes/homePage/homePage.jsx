@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Herosection from "../../components/herosection/Herosection";
 import Footer from "../../components/footer/Footer";
-
+import apiRequest from "../../lib/apiRequest";
 function HomePage() {
   const { currentUser } = useContext(AuthContext);
 
@@ -23,7 +23,15 @@ function HomePage() {
     autoplaySpeed: 5000,
     arrows: false,
   };
-
+  const handleLogout = async () => {
+    try {
+      await apiRequest.post("/auth/logout");
+      updateUser(null);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
     <div className="homePage">
@@ -57,6 +65,7 @@ function HomePage() {
         </div>
       </section>
       <Herosection/>
+        <button onClick={handleLogout}>Logout</button>
       <Footer/>
     </div>
     

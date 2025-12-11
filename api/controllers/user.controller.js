@@ -111,13 +111,25 @@ export const savePost = async (req, res) => {
     res.status(500).json({ message: "Failed to delete users!" });
   }
 };
-
 export const profilePosts = async (req, res) => {
+  console.log("🔥 /profilePosts called");
+  console.log("🍪 Raw Cookie Header:", req.headers.cookie);
+  console.log("🍪 Parsed Cookies:", req.cookies);
+  console.log("👤 req.userId:", req.userId);
+
+  // If no userId → authentication middleware failed
+  if (!req.userId) {
+    console.log("❌ No userId found → Unauthorized!");
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
   const tokenUserId = req.userId;
+
   try {
     const userPosts = await prisma.post.findMany({
       where: { userId: tokenUserId },
     });
+
     const saved = await prisma.savedPost.findMany({
       where: { userId: tokenUserId },
       include: {
@@ -126,12 +138,35 @@ export const profilePosts = async (req, res) => {
     });
 
     const savedPosts = saved.map((item) => item.post);
+
+    console.log("✅ Returning profile posts successfully");
     res.status(200).json({ userPosts, savedPosts });
   } catch (err) {
-    console.log(err);
+    console.log("❌ Error fetching profile posts:", err);
     res.status(500).json({ message: "Failed to get profile posts!" });
   }
 };
+
+// export const profilePosts = async (req, res) => {
+//   const tokenUserId = req.userId;
+//   try {
+//     const userPosts = await prisma.post.findMany({
+//       where: { userId: tokenUserId },
+//     });
+//     const saved = await prisma.savedPost.findMany({
+//       where: { userId: tokenUserId },
+//       include: {
+//         post: true,
+//       },
+//     });
+
+//     const savedPosts = saved.map((item) => item.post);
+//     res.status(200).json({ userPosts, savedPosts });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ message: "Failed to get profile posts!" });
+//   }
+// };
 
 export const getNotificationNumber = async (req, res) => {
   const tokenUserId = req.userId;

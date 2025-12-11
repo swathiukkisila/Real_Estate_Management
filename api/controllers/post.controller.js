@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const getPosts = async (req, res) => {
   const query = req.query;
+  console.log("Cookies in profile request:", req.cookies);
 
   try {
     const posts = await prisma.post.findMany({
@@ -28,6 +29,9 @@ export const getPosts = async (req, res) => {
 
 export const getPost = async (req, res) => {
   const id = req.params.id;
+  console.log("Cookies in profile request:", req.cookies);
+  console.log("🍪 Cookies received in /profilePosts:", req.headers.cookie);
+  console.log("🍪 Parsed cookies:", req.cookies);
 
   try {
     const post = await prisma.post.findUnique({
