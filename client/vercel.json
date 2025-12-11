@@ -1,6 +1,13 @@
 {
     "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
+      { "source": "/api/:path*", "destination": "https://real-estate-management-b2rz.onrender.com/api/:path*" }
+    ],
+    "redirects": [
+      {
+        "source": "/socket",
+        "destination": "https://real-estate-management-1-e19c.onrender.com",
+        "permanent": false
+      }
     ]
   }
   
